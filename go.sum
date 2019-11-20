@@ -22,6 +22,8 @@ github.com/cespare/xxhash/v2 v2.1.0/go.mod h1:dgIUBU3pDso/gPgZ1osOZ0iQf77oPR28Tj
 github.com/chronosphereio/monorepo v0.0.0-20191022083242-b4b600699a87 h1:rjRt9Jmss/tKLOUZaqWFRfQXqhNHhClfLsi+W3dPjzI=
 github.com/chronosphereiox/jaeger-client-go v0.0.0-20191115115211-80e7af12ee24 h1:G3qHMjFkHdYDBXAwP4AIxc86NAXt8JTJtDrU0h3/pKc=
 github.com/chronosphereiox/jaeger-client-go v0.0.0-20191115115211-80e7af12ee24/go.mod h1:F0u+4ybRW5JQm8mln68tbCrCcs7H0DuoF2wPKDH7y5g=
+github.com/chronosphereiox/jaeger-client-go v0.0.0-20191120210011-fca20902d9da h1:9lqkxlFYUtVxhYbngQdDQgm4S24PDSPTMSoh1d7pAs8=
+github.com/chronosphereiox/jaeger-client-go v0.0.0-20191120210011-fca20902d9da/go.mod h1:F0u+4ybRW5JQm8mln68tbCrCcs7H0DuoF2wPKDH7y5g=
 github.com/chronosphereiox/jaeger-lib v0.0.0-20191115115100-fa9e3d68ad5f h1:t5WsTpXE+YL4HJ6p5Reik3dEluqU9PYo9OJVwb0yA3s=
 github.com/chronosphereiox/jaeger-lib v0.0.0-20191115115100-fa9e3d68ad5f/go.mod h1:gpNNyp9GcdYULpcUDhuRUBHpqb7pP3Nu0vweZbN7eX0=
 github.com/chronosphereiox/prometheus_client_golang v0.0.0-20191115110020-73bbf623f24f h1:nyPDYuNIif/P2OiFO8/sUqZrtWTN9yH65ztH4dbGLN0=

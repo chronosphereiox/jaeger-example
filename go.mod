@@ -29,6 +29,6 @@ replace github.com/prometheus/client_model => github.com/chronosphereiox/prometh
 
 replace github.com/prometheus/common => github.com/chronosphereiox/prometheus_common v0.0.0-20191115104641-99b2c53c4a70
 
-replace github.com/uber/jaeger-client-go => github.com/chronosphereiox/jaeger-client-go v0.0.0-20191115115211-80e7af12ee24
+replace github.com/uber/jaeger-client-go => github.com/chronosphereiox/jaeger-client-go v0.0.0-20191120210011-fca20902d9da
 
 replace github.com/uber/jaeger-lib => github.com/chronosphereiox/jaeger-lib v0.0.0-20191115115100-fa9e3d68ad5f
