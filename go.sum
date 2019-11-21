@@ -26,6 +26,8 @@ github.com/chronosphereiox/jaeger-client-go v0.0.0-20191120210011-fca20902d9da h
 github.com/chronosphereiox/jaeger-client-go v0.0.0-20191120210011-fca20902d9da/go.mod h1:F0u+4ybRW5JQm8mln68tbCrCcs7H0DuoF2wPKDH7y5g=
 github.com/chronosphereiox/jaeger-lib v0.0.0-20191115115100-fa9e3d68ad5f h1:t5WsTpXE+YL4HJ6p5Reik3dEluqU9PYo9OJVwb0yA3s=
 github.com/chronosphereiox/jaeger-lib v0.0.0-20191115115100-fa9e3d68ad5f/go.mod h1:gpNNyp9GcdYULpcUDhuRUBHpqb7pP3Nu0vweZbN7eX0=
+github.com/chronosphereiox/jaeger-lib v0.0.0-20191121135957-7a8cd5a49e97 h1:WhsEi5QO845jBtVnOb+y0WZZyElBWev+sj7ivnKL6EI=
+github.com/chronosphereiox/jaeger-lib v0.0.0-20191121135957-7a8cd5a49e97/go.mod h1:gpNNyp9GcdYULpcUDhuRUBHpqb7pP3Nu0vweZbN7eX0=
 github.com/chronosphereiox/prometheus_client_golang v0.0.0-20191115110020-73bbf623f24f h1:nyPDYuNIif/P2OiFO8/sUqZrtWTN9yH65ztH4dbGLN0=
 github.com/chronosphereiox/prometheus_client_golang v0.0.0-20191115110020-73bbf623f24f/go.mod h1:w8hB0cUIayqkmfylx9/7QIpIcrWNhpoH/Er3hZxK86c=
 github.com/chronosphereiox/prometheus_client_model v0.0.0-20191115110231-46879917edea h1:p9KKz31fxg9USMyDwqAjcp+37Gv6G92LzDXrA7VFV5I=
