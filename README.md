@@ -21,21 +21,6 @@ to view the traces. A tutorial / walkthough is available:
 
 ## Running
 
-### IMPORTANT !!! Directory structure
-
-As this example use our own copies of some libraries, they need to be downloaded locally keeping the following structure:
-```
-./
-  /jaeger
-    /jaeger-example    => git@github.com:chronosphereiox/jaeger-example.git
-    /jaeger-lib        => git@github.com:chronosphereiox/jaeger-lib.git => branch: gg/metrics_and_tracing
-    /jaeger-client-go  => git@github.com:chronosphereiox/jaeger-client-go.git => branch: gg/metrics_and_tracing
-  /prom
-    /client_golang     => git@github.com:chronosphereiox/prometheus_client_golang.git => branch: gg/metrics_and_tracing
-    /client_model      => git@github.com:chronosphereiox/prometheus_client_model.git => branch: gg/metrics_and_tracing
-    /common            => git@github.com:chronosphereiox/prometheus_common.git => branch: gg/metrics_and_tracing
-```
-
 ### Running from source
 
 Run
