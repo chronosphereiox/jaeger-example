@@ -25,6 +25,7 @@ import (
 	"time"
 
 	"github.com/opentracing/opentracing-go"
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.uber.org/zap"
 
@@ -62,7 +63,12 @@ func (s *Server) createServeMux() http.Handler {
 	mux := tracing.NewServeMux(s.tracer)
 	mux.Handle("/route", http.HandlerFunc(s.route))
 	mux.Handle("/debug/vars", expvar.Handler()) // expvar
-	mux.Handle("/metrics", promhttp.Handler())  // Prometheus
+	mux.Handle("/metrics", promhttp.HandlerFor(
+		prometheus.DefaultGatherer,
+		promhttp.HandlerOpts{
+			EnableOpenMetrics: true,
+		}),
+	) // Prometheus
 	return mux
 }
 
