@@ -95,5 +95,8 @@ func (d *database) Get(ctx context.Context, customerID string) (*Customer, error
 	if customer, ok := d.customers[customerID]; ok {
 		return customer, nil
 	}
+	if sp := opentracing.SpanFromContext(ctx); sp != nil {
+		tags.Error.Set(sp, true)
+	}
 	return nil, errors.New("invalid customer ID")
 }

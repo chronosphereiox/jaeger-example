@@ -17,8 +17,6 @@ package frontend
 
 import (
 	"context"
-	"errors"
-	"math"
 	"sync"
 	"time"
 
@@ -80,31 +78,31 @@ func (eta *bestETA) Get(ctx context.Context, customerID string) (*Response, erro
 		span.SetBaggageItem("customer", customer.Name)
 	}
 
-	drivers, err := eta.driver.FindNearest(ctx, customer.Location)
-	if err != nil {
-		return nil, err
-	}
-	eta.logger.For(ctx).Info("Found drivers", zap.Any("drivers", drivers))
+	//drivers, err := eta.driver.FindNearest(ctx, customer.Location)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//eta.logger.For(ctx).Info("Found drivers", zap.Any("drivers", drivers))
+	//
+	//results := eta.getRoutes(ctx, customer, drivers)
+	//eta.logger.For(ctx).Info("Found routes", zap.Any("routes", results))
+	//
+	//resp := &Response{ETA: math.MaxInt64}
+	//for _, result := range results {
+	//	if result.err != nil {
+	//		return nil, err
+	//	}
+	//	if result.route.ETA < resp.ETA {
+	//		resp.ETA = result.route.ETA
+	//		resp.Driver = result.driver
+	//	}
+	//}
+	//if resp.Driver == "" {
+	//	return nil, errors.New("no routes found")
+	//}
 
-	results := eta.getRoutes(ctx, customer, drivers)
-	eta.logger.For(ctx).Info("Found routes", zap.Any("routes", results))
-
-	resp := &Response{ETA: math.MaxInt64}
-	for _, result := range results {
-		if result.err != nil {
-			return nil, err
-		}
-		if result.route.ETA < resp.ETA {
-			resp.ETA = result.route.ETA
-			resp.Driver = result.driver
-		}
-	}
-	if resp.Driver == "" {
-		return nil, errors.New("no routes found")
-	}
-
-	eta.logger.For(ctx).Info("Dispatch successful", zap.String("driver", resp.Driver), zap.String("eta", resp.ETA.String()))
-	return resp, nil
+	//eta.logger.For(ctx).Info("Dispatch successful", zap.String("driver", resp.Driver), zap.String("eta", resp.ETA.String()))
+	return &Response{}, nil
 }
 
 type routeResult struct {

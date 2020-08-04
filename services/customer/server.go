@@ -16,16 +16,20 @@
 package customer
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 
 	"github.com/opentracing/opentracing-go"
+	"github.com/opentracing/opentracing-go/ext"
 	"github.com/uber/jaeger-lib/metrics"
 	"go.uber.org/zap"
 
+	"github.com/chronosphereio/hotrod/pkg/delay"
 	"github.com/chronosphereio/hotrod/pkg/httperr"
 	"github.com/chronosphereio/hotrod/pkg/log"
 	"github.com/chronosphereio/hotrod/pkg/tracing"
+	"github.com/chronosphereio/hotrod/services/config"
 )
 
 // Server implements Customer service
@@ -34,7 +38,10 @@ type Server struct {
 	tracer   opentracing.Tracer
 	logger   log.Factory
 	database *database
+	redis *Redis
 }
+
+var operations = []string{"validateCustomer", "processCustomer", "dispatchCustomer"}
 
 // NewServer creates a new customer.Server
 func NewServer(hostPort string, tracer opentracing.Tracer, metricsFactory metrics.Factory, logger log.Factory) *Server {
@@ -46,6 +53,7 @@ func NewServer(hostPort string, tracer opentracing.Tracer, metricsFactory metric
 			tracing.Init("mysql", metricsFactory, logger),
 			logger.With(zap.String("component", "mysql")),
 		),
+		redis:    newRedis(metricsFactory, logger),
 	}
 }
 
@@ -76,10 +84,23 @@ func (s *Server) customer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := s.database.Get(ctx, customerID)
-	if httperr.HandleError(w, err, http.StatusInternalServerError) {
-		s.logger.For(ctx).Error("request failed", zap.Error(err))
-		return
+	var (
+		response *Customer
+		err error
+	)
+
+	// If Redis fails then try to get to the database.
+	response, err = s.redis.GetCustomer(ctx, customerID)
+	if err != nil {
+		response, err = s.database.Get(ctx, customerID)
+		if httperr.HandleError(w, err, http.StatusInternalServerError) {
+			s.logger.For(ctx).Error("request failed", zap.Error(err))
+			return
+		}
+	}
+	
+	for _, operation := range operations {
+		s.doStuff(ctx, customerID, operation)
 	}
 
 	data, err := json.Marshal(response)
@@ -90,4 +111,16 @@ func (s *Server) customer(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(data)
+}
+
+func (s *Server) doStuff(ctx context.Context, id string, operation string) {
+	if span := opentracing.SpanFromContext(ctx); span != nil {
+		span := s.tracer.StartSpan(operation, opentracing.ChildOf(span.Context()))
+		span.SetTag("param.id", id)
+		ext.SpanKindRPCClient.Set(span)
+		defer span.Finish()
+		ctx = opentracing.ContextWithSpan(ctx, span)
+	}
+	// simulate RPC delay
+	delay.Sleep(config.RedisFindDelay, config.RedisFindDelayStdDev)
 }

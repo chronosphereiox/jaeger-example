@@ -47,5 +47,4 @@ var customerCmd = &cobra.Command{
 
 func init() {
 	RootCmd.AddCommand(customerCmd)
-
 }
